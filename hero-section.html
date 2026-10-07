@@ -11,15 +11,21 @@
             <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
             100% Natural Scalp & Hair Care • Salon Verified
           </div>
+
+          <!-- Tagline placed correctly above heading -->
+          <p class="text-amber-400 font-serif text-xl italic tracking-wide">
+            "No Dandruff, No Hair Fall."
+          </p>
+
           <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-amber-100 leading-tight">
-            <p class="text-brand-gold font-serif text-xl italic tracking-wide mb-2">
-    "No Dandruff, No Hair Fall."
-</p>
             The Salon-Tested Secret to <span class="text-amber-400 underline decoration-amber-500/40">Healthy, Stronger & Dandruff-Free</span> Hair
           </h1>
+
           <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed">
             Infused with 7 powerful botanicals including Kesar, Bhringraj & Amla. 0% Mineral Oils, 0% Chemicals. Recommended by professional scalp experts.
           </p>
+
+          <!-- Stats Badges -->
           <div class="grid grid-cols-3 gap-3 pt-2">
             <div class="bg-emerald-900/40 p-3 rounded-xl border border-emerald-700/30 text-center">
               <span class="block text-xl font-bold text-amber-300">100%</span>
@@ -34,6 +40,8 @@
               <span class="text-[11px] text-emerald-200">SALONS</span>
             </div>
           </div>
+
+          <!-- Action Buttons -->
           <div class="flex flex-wrap items-center gap-4 pt-2">
             <a href="https://wa.me/918668939991?text=Hi%20KESRIVA%2C%20I%20want%20to%20order%20the%20hair%20oil." target="_blank" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-emerald-950 font-bold text-sm shadow-xl shadow-amber-500/20 transition flex items-center gap-2">
               <i class="fas fa-shopping-bag"></i> Order Bottle Now — ₹299
@@ -44,27 +52,27 @@
           </div>
         </div>
 
+        <!-- Right Side: Actual Product Poster Display -->
         <div class="md:col-span-5 flex justify-center">
-          <div class="w-full max-w-sm p-5 rounded-2xl bg-emerald-900/40 border border-emerald-700/50 shadow-xl text-center">
-            <span class="px-2.5 py-1 rounded bg-amber-400 text-emerald-950 font-bold text-[10px] uppercase tracking-wider">50ml Trial & Care Pack</span>
-            <div class="my-4 py-8 px-4 rounded-xl bg-gradient-to-b from-amber-800/80 to-amber-950 border border-amber-400/40 shadow-inner">
-              <h3 class="font-serif text-amber-200 text-lg font-bold">KESRIVA</h3>
-              <p class="text-[9px] text-amber-300 tracking-widest uppercase">HERBAL HAIR OIL</p>
-              <div class="w-12 h-12 rounded-full border border-amber-300/40 mx-auto my-3 flex items-center justify-center text-amber-200 text-xs">100%</div>
-              <p class="text-[10px] text-emerald-200">50ml Nozzle Dispenser</p>
-            </div>
-            <div class="flex items-center justify-center gap-3">
-              <span class="text-2xl font-bold text-amber-400">₹299</span>
-              <span class="text-xs text-emerald-400 line-through">₹399</span>
+          <div class="w-full max-w-sm rounded-2xl overflow-hidden border-2 border-amber-400/50 shadow-2xl bg-emerald-900/40">
+            <img src="hero-poster.jpg" alt="KESRIVA Herbal Hair Oil Poster" class="w-full h-auto object-cover rounded-t-2xl">
+            <div class="p-3 bg-emerald-950/90 text-center flex items-center justify-between px-4 border-t border-amber-400/30">
+              <span class="text-xs text-emerald-200 font-medium">50ml Trial & Care Pack</span>
+              <div class="flex items-center gap-2">
+                <span class="text-lg font-bold text-amber-400">₹299</span>
+                <span class="text-xs text-emerald-500 line-through">₹399</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- SLIDE 2: Full Display Poster -->
-      <div class="relative rounded-2xl overflow-hidden border-2 border-brand-gold/60 shadow-2xl">
-    <img src="hero-poster.jpg" alt="KESRIVA Premium Herbal Hair Oil" class="w-full h-auto object-cover rounded-2xl transform hover:scale-105 transition duration-500">
-</div>
+      <!-- SLIDE 2: Full Display Poster (Fixed ID & Hidden Class) -->
+      <div id="slide-2" class="hidden opacity-0 transition-all duration-1000 p-6 md:p-10 flex justify-center items-center">
+        <div class="relative max-w-2xl rounded-2xl overflow-hidden border-2 border-amber-400/60 shadow-2xl">
+          <img src="hero-poster.jpg" alt="KESRIVA Premium Herbal Hair Oil Full Poster" class="w-full h-auto object-cover rounded-2xl transform hover:scale-105 transition duration-500">
+        </div>
+      </div>
 
       <!-- Navigation Indicators -->
       <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20 bg-emerald-950/80 px-4 py-1.5 rounded-full border border-emerald-700/50">
@@ -85,6 +93,8 @@
     const s2 = document.getElementById('slide-2');
     const d1 = document.getElementById('dot-1');
     const d2 = document.getElementById('dot-2');
+
+    if (!s1 || !s2) return;
 
     if (slideNum === 1) {
       s1.classList.remove('hidden', 'opacity-0');
