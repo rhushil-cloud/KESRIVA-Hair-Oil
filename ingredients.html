@@ -1,53 +1,160 @@
-<section id="ingredients" class="py-16 bg-[#0f291e]">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <span class="px-3 py-1 rounded-full bg-emerald-900/80 border border-emerald-600/30 text-amber-300 text-xs font-semibold uppercase tracking-wider">7 Potent Botanicals</span>
-      <h2 class="text-2xl sm:text-3xl font-serif font-bold text-amber-100 mt-2">Natural Ingredients Behind the Results</h2>
-      <p class="text-emerald-200/80 text-xs sm:text-sm mt-2">Carefully combined in a pure Coconut Oil base with zero mineral oils or artificial additives.</p>
+<section id="ingredients" class="py-12 bg-brand-dark">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <span class="px-3 py-1 rounded-full bg-emerald-900/80 border border-emerald-500/30 text-emerald-200 text-xs font-semibold uppercase tracking-wider">7 Potent Botanicals</span>
+      <h2 class="text-3xl font-serif font-bold text-amber-100 mt-2">Natural Ingredients Behind the Results</h2>
+      <p class="text-xs text-emerald-200/80 mt-1">Click any herb card below to get detailed AI-powered scalp insights.</p>
     </div>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-      <div class="p-4 rounded-2xl bg-[#143d2c]/60 border border-emerald-700/40 text-center">
-        <div class="w-12 h-12 mx-auto rounded-full bg-emerald-900/80 flex items-center justify-center text-amber-300 text-xl mb-3"><i class="fas fa-spa"></i></div>
-        <h3 class="text-amber-200 font-bold text-sm">Bhringraj</h3>
-        <p class="text-emerald-200/70 text-[11px] mt-1">Strengthens roots and reduces hair shedding.</p>
+    <!-- Herb Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      
+      <!-- Bhringraj -->
+      <div onclick="showHerbDetails('Bhringraj')" class="cursor-pointer p-4 rounded-2xl bg-emerald-900/40 border border-emerald-700/50 hover:border-amber-400/80 transition transform hover:-translate-y-1 text-center">
+        <div class="w-12 h-12 mx-auto rounded-full bg-amber-400/20 border border-amber-400/50 flex items-center justify-center text-amber-300 font-bold mb-2">🌿</div>
+        <h3 class="font-bold text-amber-200 text-sm">Bhringraj</h3>
+        <p class="text-[11px] text-emerald-200/80 mt-1">Strengthens roots & reduces hair shedding.</p>
       </div>
 
-      <div class="p-4 rounded-2xl bg-[#143d2c]/60 border border-emerald-700/40 text-center">
-        <div class="w-12 h-12 mx-auto rounded-full bg-emerald-900/80 flex items-center justify-center text-amber-300 text-xl mb-3"><i class="fas fa-seedling"></i></div>
-        <h3 class="text-amber-200 font-bold text-sm">Pure Kesar</h3>
-        <p class="text-emerald-200/70 text-[11px] mt-1">Adds luxury luster, natural shine, and protects hair shaft.</p>
+      <!-- Pure Kesar -->
+      <div onclick="showHerbDetails('Pure Kesar')" class="cursor-pointer p-4 rounded-2xl bg-emerald-900/40 border border-emerald-700/50 hover:border-amber-400/80 transition transform hover:-translate-y-1 text-center">
+        <div class="w-12 h-12 mx-auto rounded-full bg-amber-400/20 border border-amber-400/50 flex items-center justify-center text-amber-300 font-bold mb-2">🌸</div>
+        <h3 class="font-bold text-amber-200 text-sm">Pure Kesar</h3>
+        <p class="text-[11px] text-emerald-200/80 mt-1">Adds natural shine & protects hair shaft.</p>
       </div>
 
-      <div class="p-4 rounded-2xl bg-[#143d2c]/60 border border-emerald-700/40 text-center">
-        <div class="w-12 h-12 mx-auto rounded-full bg-emerald-900/80 flex items-center justify-center text-amber-300 text-xl mb-3"><i class="fas fa-apple-alt"></i></div>
-        <h3 class="text-amber-200 font-bold text-sm">Amla Extract</h3>
-        <p class="text-emerald-200/70 text-[11px] mt-1">Rich in Vitamin C; nourishes scalp skin.</p>
+      <!-- Amla Extract -->
+      <div onclick="showHerbDetails('Amla Extract')" class="cursor-pointer p-4 rounded-2xl bg-emerald-900/40 border border-emerald-700/50 hover:border-amber-400/80 transition transform hover:-translate-y-1 text-center">
+        <div class="w-12 h-12 mx-auto rounded-full bg-amber-400/20 border border-amber-400/50 flex items-center justify-center text-amber-300 font-bold mb-2">🍈</div>
+        <h3 class="font-bold text-amber-200 text-sm">Amla Extract</h3>
+        <p class="text-[11px] text-emerald-200/80 mt-1">Rich in Vitamin C; nourishes scalp skin.</p>
       </div>
 
-      <div class="p-4 rounded-2xl bg-[#143d2c]/60 border border-emerald-700/40 text-center">
-        <div class="w-12 h-12 mx-auto rounded-full bg-emerald-900/80 flex items-center justify-center text-amber-300 text-xl mb-3"><i class="fas fa-mortar-pestle"></i></div>
-        <h3 class="text-amber-200 font-bold text-sm">Methi (Fenugreek)</h3>
-        <p class="text-emerald-200/70 text-[11px] mt-1">High protein content that promotes natural hair volume.</p>
+      <!-- Methi (Fenugreek) -->
+      <div onclick="showHerbDetails('Methi')" class="cursor-pointer p-4 rounded-2xl bg-emerald-900/40 border border-emerald-700/50 hover:border-amber-400/80 transition transform hover:-translate-y-1 text-center">
+        <div class="w-12 h-12 mx-auto rounded-full bg-amber-400/20 border border-amber-400/50 flex items-center justify-center text-amber-300 font-bold mb-2">🌱</div>
+        <h3 class="font-bold text-amber-200 text-sm">Methi (Fenugreek)</h3>
+        <p class="text-[11px] text-emerald-200/80 mt-1">High protein content for natural hair volume.</p>
       </div>
 
-      <div class="p-4 rounded-2xl bg-[#143d2c]/60 border border-emerald-700/40 text-center">
-        <div class="w-12 h-12 mx-auto rounded-full bg-emerald-900/80 flex items-center justify-center text-amber-300 text-xl mb-3"><i class="fas fa-shield-alt"></i></div>
-        <h3 class="text-amber-200 font-bold text-sm">Kalonji Seeds</h3>
-        <p class="text-emerald-200/70 text-[11px] mt-1">Fights scalp fungal causes of dandruff and calms irritation.</p>
+      <!-- Kalonji Seeds -->
+      <div onclick="showHerbDetails('Kalonji Seeds')" class="cursor-pointer p-4 rounded-2xl bg-emerald-900/40 border border-emerald-700/50 hover:border-amber-400/80 transition transform hover:-translate-y-1 text-center">
+        <div class="w-12 h-12 mx-auto rounded-full bg-amber-400/20 border border-amber-400/50 flex items-center justify-center text-amber-300 font-bold mb-2">🖤</div>
+        <h3 class="font-bold text-amber-200 text-sm">Kalonji Seeds</h3>
+        <p class="text-[11px] text-emerald-200/80 mt-1">Fights scalp fungal causes of dandruff.</p>
       </div>
 
-      <div class="p-4 rounded-2xl bg-[#143d2c]/60 border border-emerald-700/40 text-center">
-        <div class="w-12 h-12 mx-auto rounded-full bg-emerald-900/80 flex items-center justify-center text-amber-300 text-xl mb-3"><i class="fas fa-leaf"></i></div>
-        <h3 class="text-amber-200 font-bold text-sm">Curry Leaves</h3>
-        <p class="text-emerald-200/70 text-[11px] mt-1">Rich in antioxidants to strengthen thin hair strands.</p>
+      <!-- Curry Leaves -->
+      <div onclick="showHerbDetails('Curry Leaves')" class="cursor-pointer p-4 rounded-2xl bg-emerald-900/40 border border-emerald-700/50 hover:border-amber-400/80 transition transform hover:-translate-y-1 text-center">
+        <div class="w-12 h-12 mx-auto rounded-full bg-amber-400/20 border border-amber-400/50 flex items-center justify-center text-amber-300 font-bold mb-2">🍃</div>
+        <h3 class="font-bold text-amber-200 text-sm">Curry Leaves</h3>
+        <p class="text-[11px] text-emerald-200/80 mt-1">Rich in antioxidants to strengthen thin hair.</p>
       </div>
 
-      <div class="col-span-2 sm:col-span-3 lg:col-span-2 p-4 rounded-2xl bg-[#143d2c]/60 border border-emerald-700/40 text-center flex flex-col justify-center">
-        <div class="w-12 h-12 mx-auto rounded-full bg-amber-400/20 flex items-center justify-center text-amber-300 text-xl mb-2"><i class="fas fa-fill-drip"></i></div>
-        <h3 class="text-amber-200 font-bold text-sm">Pure Coconut Oil Base</h3>
-        <p class="text-emerald-200/70 text-[11px] mt-1">Deeply moisturizing non-sticky carrier oil for optimal deep tissue penetration.</p>
+      <!-- Pure Coconut Oil Base -->
+      <div onclick="showHerbDetails('Coconut Oil Base')" class="cursor-pointer p-4 rounded-2xl bg-emerald-900/40 border border-emerald-700/50 hover:border-amber-400/80 transition transform hover:-translate-y-1 text-center col-span-2 md:col-span-2">
+        <div class="w-12 h-12 mx-auto rounded-full bg-amber-400/20 border border-amber-400/50 flex items-center justify-center text-amber-300 font-bold mb-2">🥥</div>
+        <h3 class="font-bold text-amber-200 text-sm">Pure Coconut Oil Base</h3>
+        <p class="text-[11px] text-emerald-200/80 mt-1">Deeply moisturizing carrier oil for optimal deep tissue penetration.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AI Herb Insight Modal -->
+  <div id="herb-modal" class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-4">
+    <div class="bg-[#0f291e] border-2 border-amber-400/60 rounded-2xl max-w-lg w-full p-6 relative shadow-2xl">
+      <button onclick="closeHerbModal()" class="absolute top-3 right-3 text-emerald-300 hover:text-amber-400 text-xl font-bold">&times;</button>
+      <div id="modal-content" class="space-y-3">
+        <!-- AI output renders here -->
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const herbData = {
+    'Bhringraj': {
+      title: 'Bhringraj (King of Hair)',
+      why: 'Known in Ayurveda as Keshraj for stimulating dormant hair follicles.',
+      how: 'Infused oil carries active bio-compounds deep into hair roots to improve micro-circulation.',
+      treats: 'Hair fall, premature thinning, and weak hair roots.',
+      result: 'Visibly thicker strand density and reduced shedding within 3 to 4 weeks.',
+      who: 'Ideal for men & women experiencing stress or seasonal hair loss.'
+    },
+    'Pure Kesar': {
+      title: 'Pure Kesar (Saffron)',
+      why: 'Rich in antioxidants and essential carotenoids that restore strand elasticity.',
+      how: 'Forms a light protective seal around hair cuticles to retain moisture.',
+      treats: 'Dryness, frizz, split ends, and sun/heat damage.',
+      result: 'Silky, lustrous gloss and natural hair strength.',
+      who: 'Best for dry, damaged, or dull hair types.'
+    },
+    'Amla Extract': {
+      title: 'Amla (Indian Gooseberry)',
+      why: 'Contains high concentrations of Vitamin C and natural tannin compounds.',
+      how: 'Strengthens collagen production around follicle walls.',
+      treats: 'Early graying, flaky scalp, and root brittleness.',
+      result: 'Healthier scalp texture with natural pitch-black shine.',
+      who: 'Suitable for all scalp types needing deep nutrition.'
+    },
+    'Methi': {
+      title: 'Methi (Fenugreek)',
+      why: 'High protein and nicotinic acid content rebuild damaged hair strands.',
+      how: 'Coats hair shaft with natural mucilage, reducing friction breakage.',
+      treats: 'Thinning hair, breakage, and rough texture.',
+      result: 'Enhanced natural volume and smoother combing.',
+      who: 'Ideal for fine, thin, or easily tangled hair.'
+    },
+    'Kalonji Seeds': {
+      title: 'Kalonji (Black Seed)',
+      why: 'Contains Nigellone and Thymoquinone, potent anti-inflammatory agents.',
+      how: 'Calms itchy scalp and targets fungal microbes causing dandruff.',
+      treats: 'Chronic dandruff, itchy scalp, and scalp inflammation.',
+      result: 'Clean, flake-free scalp environment.',
+      who: 'Essential for anyone dealing with stubborn dandruff.'
+    },
+    'Curry Leaves': {
+      title: 'Curry Leaves',
+      why: 'Rich in beta-carotene and essential amino acids that fortify hair shafts.',
+      how: 'Nutrients absorb into scalp tissue to prevent follicle clog.',
+      treats: 'Scalp buildup, root weakness, and thinning.',
+      result: 'Stronger roots and revived natural growth rate.',
+      who: 'Great for weak, thinning hair.'
+    },
+    'Coconut Oil Base': {
+      title: 'Pure Cold-Pressed Coconut Oil',
+      why: 'The ultimate natural carrier oil with low molecular weight for deep penetration.',
+      how: 'Penetrates inside the hair shaft instead of resting on top.',
+      treats: 'Deep scalp dryness, moisture loss, and environmental exposure.',
+      result: 'Deeply nourished scalp with lightweight, non-greasy absorption.',
+      who: 'Perfect base for all scalp and hair types.'
+    }
+  };
+
+  function showHerbDetails(herbName) {
+    const info = herbData[herbName];
+    if (!info) return;
+
+    const modal = document.getElementById('herb-modal');
+    const content = document.getElementById('modal-content');
+
+    content.innerHTML = `
+      <div class="flex items-center gap-2 border-b border-emerald-700/50 pb-2">
+        <span class="px-2 py-0.5 rounded bg-amber-400 text-emerald-950 font-bold text-[10px] uppercase">AI Scalp Insight</span>
+        <h3 class="text-xl font-serif font-bold text-amber-300">${info.title}</h3>
+      </div>
+      <p class="text-xs text-emerald-100"><strong class="text-amber-200">Why it's used:</strong> ${info.why}</p>
+      <p class="text-xs text-emerald-100"><strong class="text-amber-200">How it works with oil:</strong> ${info.how}</p>
+      <p class="text-xs text-emerald-100"><strong class="text-amber-200">Problems treated:</strong> ${info.treats}</p>
+      <p class="text-xs text-emerald-100"><strong class="text-amber-200">Expected results:</strong> ${info.result}</p>
+      <p class="text-xs text-emerald-100"><strong class="text-amber-200">Who it affects/helps:</strong> ${info.who}</p>
+    `;
+
+    modal.classList.remove('hidden');
+  }
+
+  function closeHerbModal() {
+    document.getElementById('herb-modal').classList.add('hidden');
+  }
+</script>
