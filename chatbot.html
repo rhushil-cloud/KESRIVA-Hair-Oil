@@ -1,1 +1,51 @@
+<div class="fixed bottom-20 right-4 z-50">
+  <button onclick="toggleChat()" class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-400 to-amber-500 text-emerald-950 font-bold shadow-2xl flex items-center justify-center hover:scale-105 transition">
+    <i class="fas fa-robot text-lg"></i>
+  </button>
+</div>
 
+<div id="ai-chat-window" class="hidden fixed bottom-36 right-4 w-80 sm:w-96 bg-[#0f291e] border border-amber-500/30 rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col h-[420px]">
+  <div class="p-3 bg-[#143d2c] border-b border-emerald-700/50 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <div class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
+      <span class="text-xs font-bold text-amber-200">KESRIVA AI Hair Assistant</span>
+    </div>
+    <button onclick="toggleChat()" class="text-emerald-300 text-xs hover:text-white"><i class="fas fa-times"></i></button>
+  </div>
+  
+  <div id="chat-messages" class="flex-1 p-3 overflow-y-auto space-y-2 text-xs">
+    <div class="bg-emerald-900/60 p-2.5 rounded-xl border border-emerald-700/40 text-emerald-100 max-w-[85%]">
+      👋 Hello! I'm your KESRIVA Assistant. Ask me about ingredients, how to use for dandruff, or pricing!
+    </div>
+  </div>
+
+  <div class="p-2 border-t border-emerald-800/50 flex gap-2">
+    <input id="chat-input" type="text" placeholder="Type your question..." class="flex-1 px-3 py-2 rounded-xl bg-emerald-950/80 border border-emerald-700/50 text-emerald-100 text-xs focus:outline-none">
+    <button onclick="sendChatMessage()" class="px-3 py-2 rounded-xl bg-amber-400 text-emerald-950 font-bold text-xs"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<script>
+  function toggleChat() {
+    document.getElementById('ai-chat-window').classList.toggle('hidden');
+  }
+
+  function sendChatMessage() {
+    const input = document.getElementById('chat-input');
+    const msg = input.value.trim();
+    if(!msg) return;
+
+    const box = document.getElementById('chat-messages');
+    box.innerHTML += `<div class="bg-amber-400/20 p-2.5 rounded-xl border border-amber-400/30 text-amber-100 max-w-[85%] ml-auto text-right">${msg}</div>`;
+    input.value = '';
+
+    setTimeout(() => {
+      let reply = "KESRIVA Hair Oil is 100% natural, contains Bhringraj, Kesar, Amla, Methi & Kalonji, and costs ₹299 for 50ml. For orders call +91 86689 39991!";
+      if(msg.toLowerCase().includes('dandruff')) {
+        reply = "For dandruff, apply KESRIVA 3 times a week, massage scalp gently for 5–10 mins, and leave for 1 hour or overnight before washing!";
+      }
+      box.innerHTML += `<div class="bg-emerald-900/60 p-2.5 rounded-xl border border-emerald-700/40 text-emerald-100 max-w-[85%]">${reply}</div>`;
+      box.scrollTop = box.scrollHeight;
+    }, 600);
+  }
+</script>
