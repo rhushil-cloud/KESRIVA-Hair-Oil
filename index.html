@@ -774,5 +774,21 @@
     </footer>
 
     <script src="script.js"></script>
+<script>
+  // Function to inject HTML files into empty divs
+  function loadComponent(id, file) {
+    fetch(file)
+      .then(res => res.text())
+      .then(data => { document.getElementById(id).innerHTML = data; });
+  }
+
+  // Load all components
+  loadComponent('navbar-placeholder', 'navbar.html');
+  loadComponent('hero-placeholder', 'hero-section.html');
+  loadComponent('ingredients-placeholder', 'ingredients.html');
+  loadComponent('faq-placeholder', 'faq.html');
+  loadComponent('footer-placeholder', 'footer.html');
+  loadComponent('chatbot-placeholder', 'chatbot.html');
+</script>
 </body>
 </html>
