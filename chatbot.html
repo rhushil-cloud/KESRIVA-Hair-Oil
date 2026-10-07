@@ -1,91 +1,42 @@
-<!-- Floating Chatbot Widget -->
 <div id="kesriva-chatbot" class="fixed bottom-5 right-5 z-50 font-sans">
   
-  <!-- Toggle Button (Closed State) -->
   <button 
-    id="chat-toggle-btn"
-    onclick="toggleChatbot()"
-    class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#0b2219] border-2 border-amber-400/80 text-amber-300 text-xs font-bold shadow-2xl hover:bg-[#0f291e] transition-all transform hover:scale-105">
-    <span class="relative flex h-2.5 w-2.5">
-      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-    </span>
+    id="chat-toggle-btn" 
+    onclick="toggleChatbot()" 
+    class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#0b2219] border-2 border-amber-400/80 text-amber-300 text-xs font-bold shadow-2xl hover:bg-[#0f291e] transition">
+    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
     <span>KESRIVA AI Help</span>
   </button>
 
-  <!-- Chatbot Window (Open State) -->
   <div 
     id="chat-window" 
-    class="hidden fixed bottom-5 right-5 sm:right-6 w-[90vw] sm:w-[380px] h-[520px] bg-[#0b2219] border-2 border-amber-400/70 rounded-3xl shadow-2xl flex flex-col overflow-hidden transition-all duration-300">
+    class="hidden fixed bottom-5 right-5 w-[90vw] sm:w-[350px] h-[480px] bg-[#0b2219] border-2 border-amber-400/70 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
     
-    <!-- Chat Header -->
-    <div class="bg-[#0f291e] p-4 border-b border-emerald-800/80 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-full bg-amber-400 text-emerald-950 font-serif font-bold flex items-center justify-center text-base shadow">
-          K
-        </div>
-        <div>
-          <h3 class="font-serif font-bold text-amber-300 text-sm leading-tight">KESRIVA Scalp Advisor</h3>
-          <p class="text-[10px] text-emerald-300/80 flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online | Herbal Assistant
-          </p>
-        </div>
+    <div class="bg-[#0f291e] p-3 border-b border-emerald-800 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-full bg-amber-400 text-emerald-950 font-serif font-bold flex items-center justify-center text-xs">K</div>
+        <span class="font-serif font-bold text-amber-300 text-xs">KESRIVA Scalp Advisor</span>
       </div>
-      <button 
-        onclick="toggleChatbot()" 
-        class="text-emerald-200/70 hover:text-amber-300 text-xl font-bold p-1 leading-none transition">
-        &times;
-      </button>
+      <button onclick="toggleChatbot()" class="text-emerald-200 hover:text-amber-300 font-bold">&times;</button>
     </div>
 
-    <!-- Messages Container -->
-    <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-[#081a13] text-xs">
-      
-      <!-- AI Welcome Message -->
-      <div class="flex items-start gap-2 max-w-[85%]">
-        <div class="w-6 h-6 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">
-          AI
-        </div>
-        <div class="bg-[#0f291e] border border-emerald-700/50 text-emerald-100 p-3 rounded-2xl rounded-tl-none space-y-1 shadow-sm">
-          <p class="font-semibold text-amber-300 text-[11px]">Hello! Welcome to KESRIVA Herbal Care 👋</p>
-          <p class="text-[11px] leading-relaxed">How can I assist your scalp & hair health today? Select an option or ask me anything!</p>
-        </div>
+    <div id="chat-messages" class="flex-1 p-3 overflow-y-auto space-y-2 bg-[#081a13] text-[11px]">
+      <div class="bg-[#0f291e] border border-emerald-700/50 text-emerald-100 p-2.5 rounded-xl max-w-[85%]">
+        Hello! 👋 Welcome to KESRIVA Hair Care. How can I assist your hair health today?
       </div>
-
-      <!-- Quick Action Buttons -->
-      <div id="quick-options" class="flex flex-wrap gap-1.5 pt-1">
-        <button onclick="sendQuickReply('What are the ingredients?')" class="px-3 py-1.5 rounded-full bg-emerald-900/50 border border-emerald-700/60 hover:border-amber-400 text-emerald-200 text-[10px] transition">
-          🌿 Key Ingredients
-        </button>
-        <button onclick="sendQuickReply('How to apply the oil?')" class="px-3 py-1.5 rounded-full bg-emerald-900/50 border border-emerald-700/60 hover:border-amber-400 text-emerald-200 text-[10px] transition">
-          💆 How to Use
-        </button>
-        <button onclick="sendQuickReply('Price and Ordering')" class="px-3 py-1.5 rounded-full bg-emerald-900/50 border border-emerald-700/60 hover:border-amber-400 text-emerald-200 text-[10px] transition">
-          🛍️ Price & Order
-        </button>
-        <button onclick="sendQuickReply('Salon Bulk Inquiry')" class="px-3 py-1.5 rounded-full bg-emerald-900/50 border border-emerald-700/60 hover:border-amber-400 text-emerald-200 text-[10px] transition">
-          💈 Salon Bulk
-        </button>
-      </div>
-
     </div>
 
-    <!-- Chat Input Form -->
-    <div class="p-3 bg-[#0f291e] border-t border-emerald-800/80">
-      <form id="chat-form" onsubmit="handleUserSubmit(event)" class="flex items-center gap-2">
+    <div class="p-2.5 bg-[#0f291e] border-t border-emerald-800">
+      <form onsubmit="handleUserSubmit(event)" class="flex gap-1.5">
         <input 
           type="text" 
-          id="chat-input"
-          placeholder="Ask about hair fall, dandruff, usage..." 
-          class="flex-1 bg-[#081a13] border border-emerald-700/60 rounded-xl px-3 py-2 text-xs text-white placeholder-emerald-400/60 focus:outline-none focus:border-amber-400 transition"
+          id="chat-input" 
+          placeholder="Ask about ingredients, usage, price..." 
+          class="flex-1 bg-[#081a13] border border-emerald-700/60 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-amber-400"
           required
         />
-        <button 
-          type="submit" 
-          class="p-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-emerald-950 font-bold transition flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-            <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.917H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.917a.75.75 0 0 0 .926.941l18-7.5a.75.75 0 0 0 0-1.382l-18-7.5Z" />
-          </svg>
+        <button type="submit" class="px-3 py-1.5 rounded-lg bg-amber-400 text-emerald-950 font-bold text-xs">
+          Send
         </button>
       </form>
     </div>
@@ -93,88 +44,24 @@
   </div>
 </div>
 
-<!-- Chatbot Script -->
 <script>
   function toggleChatbot() {
-    const windowEl = document.getElementById('chat-window');
-    const toggleBtn = document.getElementById('chat-toggle-btn');
-    windowEl.classList.toggle('hidden');
-    if (!windowEl.classList.contains('hidden')) {
-      document.getElementById('chat-input').focus();
-    }
+    document.getElementById('chat-window').classList.toggle('hidden');
   }
 
-  function appendUserMessage(text) {
-    const messages = document.getElementById('chat-messages');
-    const msgDiv = document.createElement('div');
-    msgDiv.className = 'flex items-end justify-end gap-2 max-w-[85%] ml-auto';
-    msgDiv.innerHTML = `
-      <div class="bg-amber-400 text-emerald-950 p-2.5 rounded-2xl rounded-tr-none font-medium text-[11px] shadow-sm">
-        ${escapeHTML(text)}
-      </div>
-    `;
-    messages.appendChild(msgDiv);
-    messages.scrollTop = messages.scrollHeight;
-  }
-
-  function appendBotMessage(text) {
-    const messages = document.getElementById('chat-messages');
-    const msgDiv = document.createElement('div');
-    msgDiv.className = 'flex items-start gap-2 max-w-[85%]';
-    msgDiv.innerHTML = `
-      <div class="w-6 h-6 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">
-        AI
-      </div>
-      <div class="bg-[#0f291e] border border-emerald-700/50 text-emerald-100 p-3 rounded-2xl rounded-tl-none text-[11px] leading-relaxed shadow-sm">
-        ${text}
-      </div>
-    `;
-    messages.appendChild(msgDiv);
-    messages.scrollTop = messages.scrollHeight;
-  }
-
-  function handleUserSubmit(event) {
-    event.preventDefault();
+  function handleUserSubmit(e) {
+    e.preventDefault();
     const input = document.getElementById('chat-input');
-    const query = input.value.trim();
-    if (!query) return;
+    const val = input.value.trim();
+    if (!val) return;
 
-    appendUserMessage(query);
+    const msgs = document.getElementById('chat-messages');
+    msgs.innerHTML += `<div class="bg-amber-400 text-emerald-950 p-2 rounded-xl max-w-[85%] ml-auto font-medium">${val}</div>`;
     input.value = '';
-    processBotResponse(query);
-  }
-
-  function sendQuickReply(text) {
-    appendUserMessage(text);
-    processBotResponse(text);
-  }
-
-  function processBotResponse(query) {
-    const q = query.toLowerCase();
-    let reply = "";
-
-    if (q.includes("ingredient") || q.includes("botanical") || q.includes("what is inside")) {
-      reply = "KESRIVA contains 7 potent natural botanicals: <strong>Bhringraj, Pure Kesar, Amla Extract, Methi, Kalonji Seeds, Curry Leaves,</strong> blended in a <strong>Pure Coconut Oil Base</strong>.";
-    } else if (q.includes("apply") || q.includes("use") || q.includes("routine")) {
-      reply = "<strong>4-Step Application Routine:</strong><br>1. Partition hair into sections.<br>2. Apply 5–8 ml oil directly onto scalp.<br>3. Gently massage for 5–10 mins.<br>4. Leave for 1 hour or overnight before washing.";
-    } else if (q.includes("price") || q.includes("order") || q.includes("buy") || q.includes("cost")) {
-      reply = "KESRIVA Hair Oil is available in a <strong>100ml bottle for ₹299</strong>. You can order instantly via WhatsApp (+91 86689 39991) or click the 'Buy Now' button on our header.";
-    } else if (q.includes("salon") || q.includes("bulk") || q.includes("partner") || q.includes("ceo")) {
-      reply = "For salon partnerships & bulk distribution orders, please contact <strong>MD Irfan (CEO)</strong> at +91 86689 39991 or email <em>kesrivaherbalhairoil@gmail.com</em>.";
-    } else if (q.includes("dandruff") || q.includes("flakes") || q.includes("itch")) {
-      reply = "Our formula features <strong>Kalonji Seeds & Amla Extract</strong> which naturally fight fungal causes of dandruff, calming scalp itchiness within 2–3 applications.";
-    } else {
-      reply = "Thank you for reaching out! For specific questions or direct orders, feel free to call/WhatsApp us directly at <strong>+91 86689 39991</strong> or leave your details in our Salon Inquiry section.";
-    }
 
     setTimeout(() => {
-      appendBotMessage(reply);
+      msgs.innerHTML += `<div class="bg-[#0f291e] border border-emerald-700/50 text-emerald-100 p-2.5 rounded-xl max-w-[85%]">For fast assistance, reach CEO MD Irfan via Call/WhatsApp at <strong>+91 86689 39991</strong>.</div>`;
+      msgs.scrollTop = msgs.scrollHeight;
     }, 400);
-  }
-
-  function escapeHTML(str) {
-    return str.replace(/[&<>'"]/g, 
-      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-    );
   }
 </script>
