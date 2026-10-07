@@ -4,9 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KESRIVA Premium Herbal Hair Oil</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Theme Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0f291e',
+              forest: '#1b4332',
+              sage: '#2d6a4f',
+              mint: '#52b788',
+              gold: '#d4af37',
+              lightgold: '#f4e8c1',
+              cream: '#fbfbf7',
+              sand: '#f2efe9'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif']
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="bg-[#0f291e] text-white">
+<body class="bg-[#0f291e] text-white font-sans antialiased">
 
   <!-- Section Placeholders -->
   <div id="navbar-container"></div>
@@ -17,44 +50,22 @@
   <div id="footer-container"></div>
   <div id="chatbot-container"></div>
 
-  <!-- Script to load each module from its own file -->
+  <!-- Dynamic Component Loader Script -->
   <script>
     function loadSection(elementId, fileName) {
       fetch(fileName)
-        .then(response => response.text())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.text();
+        })
         .then(data => {
           document.getElementById(elementId).innerHTML = data;
         })
         .catch(err => console.error('Error loading ' + fileName, err));
     }
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    brand: {
-                        dark: '#0f291e',
-                        forest: '#1b4332',
-                        sage: '#2d6a4f',
-                        mint: '#52b788',
-                        gold: '#d4af37',
-                        lightgold: '#f4e8c1',
-                        cream: '#fbfbf7',
-                        sand: '#f2efe9'
-                    }
-                },
-                fontFamily: {
-                    sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    serif: ['"Playfair Display"', 'serif']
-                }
-            }
-        }
-    }
-</script>
-
-    
     // Load all modular sections
     loadSection('navbar-container', 'navbar.html');
     loadSection('hero-container', 'hero-section.html');
