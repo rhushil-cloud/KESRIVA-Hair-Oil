@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KESRIVA Premium Herbal Hair Oil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0f291e] text-white">
+
+  <!-- Section Placeholders -->
+  <div id="navbar-container"></div>
+  <div id="hero-container"></div>
+  <div id="video-container"></div>
+  <div id="ingredients-container"></div>
+  <div id="quiz-partner-container"></div>
+  <div id="footer-container"></div>
+  <div id="chatbot-container"></div>
+
+  <!-- Script to load each module from its own file -->
+  <script>
+    function loadSection(elementId, fileName) {
+      fetch(fileName)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById(elementId).innerHTML = data;
+        })
+        .catch(err => console.error('Error loading ' + fileName, err));
+    }
+
+    // Load all modular sections
+    loadSection('navbar-container', 'navbar.html');
+    loadSection('hero-container', 'hero-section.html');
+    loadSection('video-container', 'video-section.html');
+    loadSection('ingredients-container', 'ingredients.html');
+    loadSection('quiz-partner-container', 'quiz-partner.html');
+    loadSection('footer-container', 'footer.html');
+    loadSection('chatbot-container', 'chatbot.html');
+  </script>
+
+</body>
+</html>
