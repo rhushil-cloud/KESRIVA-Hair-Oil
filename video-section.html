@@ -1,84 +1,50 @@
-<section id="video-demo" class="py-16 bg-[#123325] border-y border-emerald-800/40">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center max-w-2xl mx-auto mb-10">
-      <span class="px-3 py-1 rounded-full bg-emerald-900/80 border border-emerald-600/30 text-amber-300 text-xs font-semibold uppercase tracking-wider">30-Second Salon Secret</span>
-      <h2 class="text-2xl sm:text-3xl font-serif font-bold text-amber-100 mt-2">How To Use KESRIVA — Professional Scalp Routine</h2>
-      <p class="text-emerald-200/80 text-xs sm:text-sm mt-2">Watch how salon expert stylists inspect scalp condition, detect initial dandruff/dryness, and apply KESRIVA Herbal Hair Oil for maximum absorption.</p>
+<section id="video-demo" class="py-12 bg-brand-dark">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-8">
+      <span class="px-3 py-1 rounded-full bg-emerald-900/80 border border-emerald-500/30 text-emerald-200 text-xs font-semibold uppercase tracking-wider">30-Second Salon Secret</span>
+      <h2 class="text-3xl font-serif font-bold text-amber-100 mt-2">How To Use KESRIVA — Professional Scalp Routine</h2>
     </div>
 
-    <div class="grid lg:grid-cols-12 gap-8 items-center">
-      <div class="lg:col-span-7">
-        <div class="aspect-video bg-[#091a13] rounded-2xl border border-emerald-700/50 shadow-2xl relative overflow-hidden flex items-center justify-center">
-          <!-- Replace src with your YouTube embed URL or Direct MP4 link -->
-          <iframe id="salon-video-player" class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0" title="KESRIVA Salon Demonstration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="grid md:grid-cols-12 gap-8 items-center">
+      <!-- YouTube Embed Player -->
+      <div class="md:col-span-7">
+        <div class="relative aspect-video rounded-2xl overflow-hidden border-2 border-amber-400/40 shadow-2xl">
+          <!-- Replace YOUR_YOUTUBE_VIDEO_ID with your video ID -->
+          <iframe 
+            class="w-full h-full" 
+            src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" 
+            title="KESRIVA Hair Oil Routine" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
 
-      <div class="lg:col-span-5 space-y-3">
-        <h3 class="text-amber-200 font-serif font-bold text-lg mb-2">4 Simple Steps for Best Results</h3>
+      <!-- 4 Steps Column -->
+      <div class="md:col-span-5 space-y-4">
+        <h3 class="text-xl font-bold font-serif text-amber-300">4 Simple Steps for Best Results</h3>
         
-        <div id="step-1" class="p-3.5 rounded-xl bg-amber-500/20 border border-amber-400/50 transition cursor-pointer" onclick="setActiveStep(1)">
-          <div class="flex items-start gap-3">
-            <span class="w-6 h-6 rounded-full bg-amber-400 text-emerald-950 font-bold text-xs flex items-center justify-center shrink-0">1</span>
-            <div>
-              <h4 class="text-amber-100 text-sm font-semibold">Inspect Scalp & Partition Hair</h4>
-              <p class="text-emerald-200/80 text-xs mt-0.5">Gently part hair in clean sections to expose scalp areas affected by dryness or dandruff.</p>
-            </div>
-          </div>
+        <div class="p-4 rounded-xl bg-emerald-900/30 border border-emerald-700/40">
+          <span class="font-bold text-amber-400 text-sm">1. Inspect Scalp & Partition Hair</span>
+          <p class="text-xs text-emerald-100/80 mt-1">Gently part hair in clean sections to expose dry or dandruff-affected areas.</p>
         </div>
 
-        <div id="step-2" class="p-3.5 rounded-xl bg-emerald-900/30 border border-emerald-800/40 hover:bg-emerald-800/30 transition cursor-pointer" onclick="setActiveStep(2)">
-          <div class="flex items-start gap-3">
-            <span class="w-6 h-6 rounded-full bg-emerald-800 text-emerald-200 font-bold text-xs flex items-center justify-center shrink-0">2</span>
-            <div>
-              <h4 class="text-emerald-100 text-sm font-semibold">Recommend & Apply KESRIVA Oil</h4>
-              <p class="text-emerald-200/80 text-xs mt-0.5">Dispense 5–8 ml KESRIVA Herbal Oil directly onto partitions using nozzle applicator.</p>
-            </div>
-          </div>
+        <div class="p-4 rounded-xl bg-emerald-900/30 border border-emerald-700/40">
+          <span class="font-bold text-amber-400 text-sm">2. Recommend & Apply KESRIVA Oil</span>
+          <p class="text-xs text-emerald-100/80 mt-1">Dispense 5–8 ml directly onto scalp partitions using nozzle applicator.</p>
         </div>
 
-        <div id="step-3" class="p-3.5 rounded-xl bg-emerald-900/30 border border-emerald-800/40 hover:bg-emerald-800/30 transition cursor-pointer" onclick="setActiveStep(3)">
-          <div class="flex items-start gap-3">
-            <span class="w-6 h-6 rounded-full bg-emerald-800 text-emerald-200 font-bold text-xs flex items-center justify-center shrink-0">3</span>
-            <div>
-              <h4 class="text-emerald-100 text-sm font-semibold">5–10 Min Circular Massage</h4>
-              <p class="text-emerald-200/80 text-xs mt-0.5">Use soft fingertip pressure in circular movements to enhance blood flow and follicle penetration.</p>
-            </div>
-          </div>
+        <div class="p-4 rounded-xl bg-emerald-900/30 border border-emerald-700/40">
+          <span class="font-bold text-amber-400 text-sm">3. 5–10 Min Circular Massage</span>
+          <p class="text-xs text-emerald-100/80 mt-1">Use soft fingertip pressure in circular movements to enhance follicle penetration.</p>
         </div>
 
-        <div id="step-4" class="p-3.5 rounded-xl bg-emerald-900/30 border border-emerald-800/40 hover:bg-emerald-800/30 transition cursor-pointer" onclick="setActiveStep(4)">
-          <div class="flex items-start gap-3">
-            <span class="w-6 h-6 rounded-full bg-emerald-800 text-emerald-200 font-bold text-xs flex items-center justify-center shrink-0">4</span>
-            <div>
-              <h4 class="text-emerald-100 text-sm font-semibold">Leave for 1 Hour or Overnight</h4>
-              <p class="text-emerald-200/80 text-xs mt-0.5">Allow natural herbs to work deeply before rinsing off with a mild chemical-free shampoo.</p>
-            </div>
-          </div>
+        <div class="p-4 rounded-xl bg-emerald-900/30 border border-emerald-700/40">
+          <span class="font-bold text-amber-400 text-sm">4. Leave for 1 Hour or Overnight</span>
+          <p class="text-xs text-emerald-100/80 mt-1">Allow natural herbs to work deeply before rinsing off with mild shampoo.</p>
         </div>
-
       </div>
     </div>
   </div>
 </section>
-
-<script>
-  let activeStep = 1;
-  function setActiveStep(stepNum) {
-    activeStep = stepNum;
-    for(let i = 1; i <= 4; i++) {
-      const el = document.getElementById(`step-${i}`);
-      if(i === stepNum) {
-        el.className = "p-3.5 rounded-xl bg-amber-500/20 border border-amber-400/50 transition cursor-pointer";
-      } else {
-        el.className = "p-3.5 rounded-xl bg-emerald-900/30 border border-emerald-800/40 hover:bg-emerald-800/30 transition cursor-pointer";
-      }
-    }
-  }
-
-  // Auto switch step highlights every 10 seconds
-  setInterval(() => {
-    activeStep = activeStep === 4 ? 1 : activeStep + 1;
-    setActiveStep(activeStep);
-  }, 10000);
-</script>
