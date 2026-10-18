@@ -926,7 +926,7 @@ async function submitUserReview(e) {
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     };
 
-    // Construct URL parameters to bypass CORS payload restrictions
+    // 1. Build the data URL
     const params = new URLSearchParams({
         name: nameInput,
         phone: phoneInput,
@@ -935,18 +935,13 @@ async function submitUserReview(e) {
         text: reviewTextInput
     });
 
-    const endpointWithParams = `${GOOGLE_SHEET_URL}?${params.toString()}`;
+    const targetUrl = `${GOOGLE_SHEET_URL}?${params.toString()}`;
 
-    try {
-        fetch(endpointWithParams, {
-            method: "GET",
-            mode: "no-cors"
-        });
-    } catch (err) {
-        console.error("Transmission error:", err);
-    }
+    // 2. Submit to Google Sheet using a background Image ping (bypasses browser CORS blocking)
+    const imgPing = new Image();
+    imgPing.src = targetUrl;
 
-    // Save locally for instant UI rendering on website
+    // 3. Save locally for instant website rendering
     const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
     savedReviews.unshift(newReview);
     localStorage.setItem("kesriva_reviews", JSON.stringify(savedReviews));
