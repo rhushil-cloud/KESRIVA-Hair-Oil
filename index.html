@@ -912,7 +912,6 @@
 async function submitUserReview(e) {
     e.preventDefault();
     
-    // Retrieve values directly from input IDs
     const nameInput = document.getElementById("rev-name").value.trim();
     const phoneInput = document.getElementById("rev-phone").value.trim();
     const emailInput = document.getElementById("rev-email").value.trim();
@@ -927,7 +926,6 @@ async function submitUserReview(e) {
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     };
 
-    // Construct exact parameter keys matching Apps Script
     const params = new URLSearchParams({
         name: nameInput,
         phone: phoneInput,
@@ -936,12 +934,12 @@ async function submitUserReview(e) {
         text: reviewTextInput
     });
 
-    // Send submission as an image URL ping
+    // Trigger request to Google Apps Script
     const targetUrl = `${GOOGLE_SHEET_URL}?${params.toString()}`;
     const imgPing = new Image();
     imgPing.src = targetUrl;
 
-    // Save locally for instant rendering on website
+    // Local storage rendering
     const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
     savedReviews.unshift(newReview);
     localStorage.setItem("kesriva_reviews", JSON.stringify(savedReviews));
@@ -953,7 +951,7 @@ async function submitUserReview(e) {
     alert("Thank you! Your review has been submitted successfully.");
     e.target.reset();
     toggleReviewModal();
-}        
+}
         function renderReviewCard(review, prepend = true) {
             const carousel = document.getElementById("reviews-carousel");
             if (!carousel) return;
