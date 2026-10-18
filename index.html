@@ -909,8 +909,7 @@
                 }
             });
         }
-
-        async function submitUserReview(e) {
+async function submitUserReview(e) {
     e.preventDefault();
     
     const nameInput = document.getElementById("rev-name").value.trim();
@@ -927,24 +926,24 @@
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     };
 
-    // Construct URL Query parameters to pass data to Google Apps Script
-    const params = new URLSearchParams();
-    params.append("name", nameInput);
-    params.append("phone", phoneInput);
-    params.append("email", emailInput);
-    params.append("rating", selectedRating);
-    params.append("text", reviewTextInput);
+    // Construct URL parameters to bypass CORS payload restrictions
+    const params = new URLSearchParams({
+        name: nameInput,
+        phone: phoneInput,
+        email: emailInput,
+        rating: selectedRating,
+        text: reviewTextInput
+    });
 
-    const submitUrl = `${GOOGLE_SHEET_URL}?${params.toString()}`;
+    const endpointWithParams = `${GOOGLE_SHEET_URL}?${params.toString()}`;
 
     try {
-        // Send request via GET or POST with URL parameters
-        fetch(submitUrl, {
-            method: "POST",
+        fetch(endpointWithParams, {
+            method: "GET",
             mode: "no-cors"
         });
     } catch (err) {
-        console.error("Failed to send review to Google Drive:", err);
+        console.error("Transmission error:", err);
     }
 
     // Save locally for instant UI rendering on website
@@ -960,7 +959,7 @@
     e.target.reset();
     toggleReviewModal();
 }
-
+        
         function renderReviewCard(review, prepend = true) {
             const carousel = document.getElementById("reviews-carousel");
             if (!carousel) return;
