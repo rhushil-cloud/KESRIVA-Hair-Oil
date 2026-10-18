@@ -911,53 +911,55 @@
         }
 
         async function submitUserReview(e) {
-            e.preventDefault();
-            
-            const nameInput = document.getElementById("rev-name").value.trim();
-            const phoneInput = document.getElementById("rev-phone").value.trim();
-            const emailInput = document.getElementById("rev-email").value.trim();
-            const reviewTextInput = document.getElementById("rev-text").value.trim();
-            
-            const newReview = {
-                name: nameInput,
-                phone: phoneInput,
-                email: emailInput,
-                rating: selectedRating,
-                text: reviewTextInput,
-                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-            };
+    e.preventDefault();
+    
+    const nameInput = document.getElementById("rev-name").value.trim();
+    const phoneInput = document.getElementById("rev-phone").value.trim();
+    const emailInput = document.getElementById("rev-email").value.trim();
+    const reviewTextInput = document.getElementById("rev-text").value.trim();
+    
+    const newReview = {
+        name: nameInput,
+        phone: phoneInput,
+        email: emailInput,
+        rating: selectedRating,
+        text: reviewTextInput,
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    };
 
-            // Convert payload to URL Search Params to guarantee Google Apps Script receives parameters in no-cors mode
-            const urlEncodedData = new URLSearchParams();
-            urlEncodedData.append("name", nameInput);
-            urlEncodedData.append("phone", phoneInput);
-            urlEncodedData.append("email", emailInput);
-            urlEncodedData.append("rating", selectedRating);
-            urlEncodedData.append("text", reviewTextInput);
+    // Construct URL Query parameters to pass data to Google Apps Script
+    const params = new URLSearchParams();
+    params.append("name", nameInput);
+    params.append("phone", phoneInput);
+    params.append("email", emailInput);
+    params.append("rating", selectedRating);
+    params.append("text", reviewTextInput);
 
-            try {
-                fetch(GOOGLE_SHEET_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: urlEncodedData.toString()
-                });
-            } catch (err) {
-                console.error("Failed to send review to Google Drive:", err);
-            }
+    const submitUrl = `${GOOGLE_SHEET_URL}?${params.toString()}`;
 
-            const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
-            savedReviews.unshift(newReview);
-            localStorage.setItem("kesriva_reviews", JSON.stringify(savedReviews));
+    try {
+        // Send request via GET or POST with URL parameters
+        fetch(submitUrl, {
+            method: "POST",
+            mode: "no-cors"
+        });
+    } catch (err) {
+        console.error("Failed to send review to Google Drive:", err);
+    }
 
-            totalReviewCount++;
-            updateReviewCountUI();
-            renderReviewCard(newReview, true);
+    // Save locally for instant UI rendering on website
+    const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
+    savedReviews.unshift(newReview);
+    localStorage.setItem("kesriva_reviews", JSON.stringify(savedReviews));
 
-            alert("Thank you! Your review has been submitted successfully.");
-            e.target.reset();
-            toggleReviewModal();
-        }
+    totalReviewCount++;
+    updateReviewCountUI();
+    renderReviewCard(newReview, true);
+
+    alert("Thank you! Your review has been submitted successfully.");
+    e.target.reset();
+    toggleReviewModal();
+}
 
         function renderReviewCard(review, prepend = true) {
             const carousel = document.getElementById("reviews-carousel");
