@@ -395,30 +395,24 @@
         </div>
     </section>
 
-    <!-- Customer Reviews & Rating Section (Example 1) -->
+    <!-- Customer Reviews & Rating Section -->
     <section id="reviews" class="py-16 bg-brand-sand/40 border-t border-brand-gold/20">
         <div class="container mx-auto px-4 max-w-5xl">
-            
-            <!-- Section Header -->
             <div class="text-center mb-10">
                 <span class="text-brand-forest font-bold text-xs uppercase tracking-widest bg-emerald-100 border border-emerald-200 px-3 py-1 rounded-full">Verified Testimonials</span>
                 <h2 class="text-3xl font-serif font-bold text-brand-dark mt-2">What Our Customers Say</h2>
                 <p class="text-xs sm:text-sm text-gray-600 mt-1">Real results from everyday users of KESRIVA Herbal Hair Oil.</p>
             </div>
 
-            <!-- Rating Summary Bar & Action -->
             <div class="bg-white border border-brand-gold/30 rounded-3xl p-6 sm:p-8 mb-10 shadow-lg grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                
-                <!-- Overall Score -->
                 <div class="md:col-span-4 text-center md:border-r border-gray-200 pr-0 md:pr-6">
                     <p class="text-5xl font-extrabold text-brand-dark">4.9</p>
                     <div class="flex justify-center text-brand-gold text-lg my-1">
                         ★★★★★
                     </div>
-                    <p class="text-xs text-gray-500 font-medium">Based on 120+ verified reviews</p>
+                    <p id="review-count-text" class="text-xs text-gray-500 font-medium">Based on 120+ verified reviews</p>
                 </div>
 
-                <!-- Breakdown Bars -->
                 <div class="md:col-span-5 space-y-1.5 text-xs">
                     <div class="flex items-center space-x-2">
                         <span class="w-8 font-semibold text-gray-700">5 ★</span>
@@ -443,7 +437,6 @@
                     </div>
                 </div>
 
-                <!-- Write Review Call-to-Action -->
                 <div class="md:col-span-3 text-center">
                     <button onclick="toggleReviewModal()" class="gold-btn text-brand-dark font-extrabold text-xs px-5 py-3.5 rounded-xl shadow-md w-full hover:scale-105 transition transform">
                         <i class="fa-solid fa-pen mr-1"></i> Write a Review
@@ -451,10 +444,7 @@
                 </div>
             </div>
 
-            <!-- Reviews List Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
-                <!-- Review Card 1 -->
                 <div class="bg-white border border-brand-gold/20 p-6 rounded-2xl shadow-sm space-y-3">
                     <div class="flex justify-between items-start">
                         <div>
@@ -474,7 +464,6 @@
                     </div>
                 </div>
 
-                <!-- Review Card 2 -->
                 <div class="bg-white border border-brand-gold/20 p-6 rounded-2xl shadow-sm space-y-3">
                     <div class="flex justify-between items-start">
                         <div>
@@ -493,7 +482,6 @@
                         <span class="text-emerald-700"><i class="fa-solid fa-thumbs-up mr-1"></i>Helpful</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -501,8 +489,6 @@
     <!-- Interactive Review Modal Pop-up -->
     <div id="review-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full border-2 border-brand-gold shadow-2xl relative">
-            
-            <!-- Close Button -->
             <button onclick="toggleReviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -510,7 +496,7 @@
             <h3 class="font-serif text-2xl font-bold text-brand-dark">Share Your Experience</h3>
             <p class="text-xs text-gray-500 mb-4">Your rating helps others choose authentic herbal hair care.</p>
 
-            <form onsubmit="submitUserReview(event)" class="space-y-4 text-xs">
+            <form onsubmit="submitUserReview(event)" class="space-y-3 text-xs">
                 <div>
                     <label class="block font-bold text-gray-700 mb-1">Your Overall Rating</label>
                     <div class="flex space-x-2 text-2xl text-brand-gold cursor-pointer" id="star-rating-picker">
@@ -523,13 +509,24 @@
                 </div>
 
                 <div>
-                    <label class="block font-bold text-gray-700 mb-1">Full Name</label>
-                    <input type="text" required placeholder="Your Name" class="w-full bg-brand-cream border border-gray-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-gold text-gray-800">
+                    <label class="block font-bold text-gray-700 mb-1">Full Name *</label>
+                    <input id="rev-name" type="text" required placeholder="Your Name" class="w-full bg-brand-cream border border-gray-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-gold text-gray-800">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1">Phone Number *</label>
+                        <input id="rev-phone" type="tel" required placeholder="+91 98765 43210" class="w-full bg-brand-cream border border-gray-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-gold text-gray-800">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1">Email Address *</label>
+                        <input id="rev-email" type="email" required placeholder="name@example.com" class="w-full bg-brand-cream border border-gray-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-gold text-gray-800">
+                    </div>
                 </div>
 
                 <div>
-                    <label class="block font-bold text-gray-700 mb-1">Your Review</label>
-                    <textarea rows="3" required placeholder="How did KESRIVA Herbal Hair Oil help your scalp or hair care routine?" class="w-full bg-brand-cream border border-gray-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-gold text-gray-800"></textarea>
+                    <label class="block font-bold text-gray-700 mb-1">Your Review *</label>
+                    <textarea id="rev-text" rows="3" required placeholder="How did KESRIVA Herbal Hair Oil help your scalp or hair care routine?" class="w-full bg-brand-cream border border-gray-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-brand-gold text-gray-800"></textarea>
                 </div>
 
                 <button type="submit" class="w-full gold-btn text-brand-dark font-extrabold py-3.5 rounded-xl text-xs shadow-lg">
@@ -625,7 +622,6 @@
     <section id="social" class="py-16 bg-brand-forest text-white">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                <!-- Founder Profile -->
                 <div class="lg:col-span-5 space-y-4">
                     <div class="relative bg-brand-dark p-6 rounded-3xl border border-brand-gold/30 shadow-2xl">
                         <div class="flex items-center space-x-4 mb-4">
@@ -647,7 +643,6 @@
                     </div>
                 </div>
 
-                <!-- Instagram Showcase Card -->
                 <div class="lg:col-span-7 bg-brand-dark/90 p-6 sm:p-8 rounded-3xl border border-brand-gold/40 shadow-xl space-y-5">
                     <div class="flex items-center justify-between border-b border-emerald-800/80 pb-4">
                         <div class="flex items-center space-x-3">
@@ -846,7 +841,25 @@
     </footer>
 
     <script>
-        // --- 1. Review Modal & Rating Scripts ---
+        // Google Apps Script Web App Endpoint
+        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwsqYoFgL5Hdjc-a78KhrztX9J59cu6Jb7Vl-og-p1mS5CWplAIMo56RTe0GoPp5VMVQ/exec";
+
+        let totalReviewCount = 120;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
+            totalReviewCount += savedReviews.length;
+            updateReviewCountUI();
+            savedReviews.forEach(review => renderReviewCard(review, false));
+        });
+
+        function updateReviewCountUI() {
+            const countElements = document.querySelectorAll("#review-count-text");
+            countElements.forEach(el => {
+                el.innerText = `Based on ${totalReviewCount}+ verified reviews`;
+            });
+        }
+
         function toggleReviewModal() {
             document.getElementById('review-modal').classList.toggle('hidden');
         }
@@ -866,13 +879,84 @@
             });
         }
 
-        function submitUserReview(e) {
+        async function submitUserReview(e) {
             e.preventDefault();
-            alert("Thank you! Your review has been submitted for moderation.");
+            
+            const nameInput = document.getElementById("rev-name").value.trim();
+            const phoneInput = document.getElementById("rev-phone").value.trim();
+            const emailInput = document.getElementById("rev-email").value.trim();
+            const reviewTextInput = document.getElementById("rev-text").value.trim();
+            
+            const newReview = {
+                name: nameInput,
+                phone: phoneInput,
+                email: emailInput,
+                rating: selectedRating,
+                text: reviewTextInput,
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+            };
+
+            // Post review to Google Sheet & email trigger
+            try {
+                fetch(GOOGLE_SHEET_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(newReview)
+                });
+            } catch (err) {
+                console.error("Failed to send review to Google Drive:", err);
+            }
+
+            // Save locally for immediate display
+            const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
+            savedReviews.unshift(newReview);
+            localStorage.setItem("kesriva_reviews", JSON.stringify(savedReviews));
+
+            totalReviewCount++;
+            updateReviewCountUI();
+            renderReviewCard(newReview, true);
+
+            alert("Thank you! Your review has been submitted successfully.");
+            e.target.reset();
             toggleReviewModal();
         }
 
-        // --- 2. Diagnostic Quiz Scripts ---
+        function renderReviewCard(review, prepend = true) {
+            const reviewsGrid = document.querySelector("#reviews .grid.grid-cols-1.md\\:grid-cols-2");
+            if (!reviewsGrid) return;
+
+            let starsHtml = "★".repeat(review.rating);
+
+            const card = document.createElement("div");
+            card.className = "bg-white border border-brand-gold/40 p-6 rounded-2xl shadow-md space-y-3";
+            card.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="font-bold text-sm text-brand-dark">${review.name}</h4>
+                        <span class="text-[10px] text-emerald-800 bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded-full font-medium inline-block mt-1">
+                            <i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer
+                        </span>
+                    </div>
+                    <span class="text-brand-gold text-xs font-bold">${starsHtml}</span>
+                </div>
+                <p class="text-xs text-gray-700 leading-relaxed italic">
+                    "${review.text}"
+                </p>
+                <div class="flex items-center justify-between text-[10px] text-gray-400 pt-1 border-t border-gray-100">
+                    <span>Reviewed on ${review.date}</span>
+                    <span class="text-emerald-700"><i class="fa-solid fa-thumbs-up mr-1"></i>Helpful</span>
+                </div>
+            `;
+
+            if (prepend) {
+                reviewsGrid.prepend(card);
+            } else {
+                reviewsGrid.appendChild(card);
+            }
+        }
+
+        // --- Diagnostic Quiz Scripts ---
         let quizAnswers = {};
 
         function answerQuiz(qNum, answer) {
@@ -896,7 +980,7 @@
             }
         }
 
-        // --- 3. AI Chatbot Scripts ---
+        // --- AI Chatbot Scripts ---
         function toggleChatbot() {
             const chatWin = document.getElementById('chat-window');
             chatWin.classList.toggle('hidden');
