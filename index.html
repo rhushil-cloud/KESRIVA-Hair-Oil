@@ -25,13 +25,22 @@
         }
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
+            height: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #f1f1f1;
+            border-radius: 10px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #2d6a4f;
-            border-radius: 3px;
+            border-radius: 10px;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
     <script>
@@ -71,7 +80,6 @@
     <!-- Main Header / Navigation -->
     <header class="sticky top-0 bg-brand-forest/95 backdrop-blur-md text-white shadow-lg z-40 border-b border-brand-gold/30">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <!-- Brand Logo -->
             <a href="#" class="flex items-center space-x-2">
                 <img 
                     src="./logo.jpg" 
@@ -84,7 +92,6 @@
                 </div>
             </a>
 
-            <!-- Desktop Nav Links -->
             <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-emerald-100">
                 <a href="#hero" class="hover:text-brand-gold transition">Home</a>
                 <a href="#product" class="hover:text-brand-gold transition">Product</a>
@@ -97,7 +104,6 @@
                 <a href="#faq" class="hover:text-brand-gold transition">FAQ</a>
             </nav>
 
-            <!-- Action Buttons -->
             <div class="flex items-center space-x-3">
                 <a href="https://wa.me/918668939991?text=Hi%20KESRIVA,%20I%20want%20to%20order%20the%2050ml%20Herbal%20Hair%20Oil" target="_blank" class="hidden lg:flex items-center space-x-1.5 bg-emerald-700 hover:bg-emerald-600 text-white text-xs px-3 py-2 rounded-full font-medium transition border border-emerald-500">
                     <i class="fa-brands fa-whatsapp text-lg text-emerald-300"></i>
@@ -226,7 +232,6 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <!-- Video Player Column -->
                 <div class="lg:col-span-7">
                     <div class="relative bg-brand-dark rounded-3xl overflow-hidden shadow-2xl border-4 border-brand-gold/30">
                         <video 
@@ -247,7 +252,6 @@
                     </div>
                 </div>
 
-                <!-- Steps Instructions Column -->
                 <div class="lg:col-span-5 space-y-3">
                     <h3 class="font-serif text-2xl font-bold text-brand-dark">4 Simple Steps for Best Results</h3>
                     <p class="text-xs text-gray-500 mb-4">Follow this simple application routine for optimal root nourishment.</p>
@@ -395,15 +399,16 @@
         </div>
     </section>
 
-    <!-- Customer Reviews & Rating Section -->
+    <!-- Customer Reviews Carousel Section -->
     <section id="reviews" class="py-16 bg-brand-sand/40 border-t border-brand-gold/20">
-        <div class="container mx-auto px-4 max-w-5xl">
+        <div class="container mx-auto px-4 max-w-6xl">
             <div class="text-center mb-10">
                 <span class="text-brand-forest font-bold text-xs uppercase tracking-widest bg-emerald-100 border border-emerald-200 px-3 py-1 rounded-full">Verified Testimonials</span>
                 <h2 class="text-3xl font-serif font-bold text-brand-dark mt-2">What Our Customers Say</h2>
                 <p class="text-xs sm:text-sm text-gray-600 mt-1">Real results from everyday users of KESRIVA Herbal Hair Oil.</p>
             </div>
 
+            <!-- Score Summary Card -->
             <div class="bg-white border border-brand-gold/30 rounded-3xl p-6 sm:p-8 mb-10 shadow-lg grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 <div class="md:col-span-4 text-center md:border-r border-gray-200 pr-0 md:pr-6">
                     <p class="text-5xl font-extrabold text-brand-dark">4.9</p>
@@ -444,8 +449,24 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white border border-brand-gold/20 p-6 rounded-2xl shadow-sm space-y-3">
+            <!-- Carousel Header & Buttons -->
+            <div class="flex justify-between items-center mb-4 px-2">
+                <span class="text-xs font-bold text-brand-forest uppercase tracking-wider"><i class="fa-solid fa-comments mr-1.5 text-brand-gold"></i> Customer Experience Carousel</span>
+                <div class="flex space-x-2">
+                    <button onclick="scrollCarousel(-1)" class="w-9 h-9 rounded-full bg-white border border-brand-gold/40 text-brand-dark hover:bg-brand-gold hover:text-brand-dark transition shadow flex items-center justify-center">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    </button>
+                    <button onclick="scrollCarousel(1)" class="w-9 h-9 rounded-full bg-white border border-brand-gold/40 text-brand-dark hover:bg-brand-gold hover:text-brand-dark transition shadow flex items-center justify-center">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Horizontal Scroll/Carousel Container -->
+            <div id="reviews-carousel" class="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar py-2 px-1">
+                
+                <!-- Static Review Card 1 -->
+                <div class="min-w-[280px] sm:min-w-[340px] md:min-w-[380px] max-w-[380px] bg-white border border-brand-gold/30 p-6 rounded-2xl shadow-sm space-y-3 shrink-0">
                     <div class="flex justify-between items-start">
                         <div>
                             <h4 class="font-bold text-sm text-brand-dark">Priya Sharma</h4>
@@ -464,7 +485,8 @@
                     </div>
                 </div>
 
-                <div class="bg-white border border-brand-gold/20 p-6 rounded-2xl shadow-sm space-y-3">
+                <!-- Static Review Card 2 -->
+                <div class="min-w-[280px] sm:min-w-[340px] md:min-w-[380px] max-w-[380px] bg-white border border-brand-gold/30 p-6 rounded-2xl shadow-sm space-y-3 shrink-0">
                     <div class="flex justify-between items-start">
                         <div>
                             <h4 class="font-bold text-sm text-brand-dark">Aniket Verma</h4>
@@ -482,6 +504,7 @@
                         <span class="text-emerald-700"><i class="fa-solid fa-thumbs-up mr-1"></i>Helpful</span>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -840,8 +863,8 @@
         </div>
     </footer>
 
+    <!-- JavaScript Logic -->
     <script>
-        // Google Apps Script Web App Endpoint
         const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwsqYoFgL5Hdjc-a78KhrztX9J59cu6Jb7Vl-og-p1mS5CWplAIMo56RTe0GoPp5VMVQ/exec";
 
         let totalReviewCount = 120;
@@ -862,6 +885,14 @@
 
         function toggleReviewModal() {
             document.getElementById('review-modal').classList.toggle('hidden');
+        }
+
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById("reviews-carousel");
+            carousel.scrollBy({
+                left: direction * 340,
+                behavior: 'smooth'
+            });
         }
 
         let selectedRating = 5;
@@ -896,27 +927,25 @@
                 date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
             };
 
-            // Prepare URL-encoded form payload to guarantee cross-origin transmission to Apps Script
-            const payload = new URLSearchParams();
-            payload.append("name", nameInput);
-            payload.append("phone", phoneInput);
-            payload.append("email", emailInput);
-            payload.append("rating", selectedRating);
-            payload.append("text", reviewTextInput);
+            // Convert payload to URL Search Params to guarantee Google Apps Script receives parameters in no-cors mode
+            const urlEncodedData = new URLSearchParams();
+            urlEncodedData.append("name", nameInput);
+            urlEncodedData.append("phone", phoneInput);
+            urlEncodedData.append("email", emailInput);
+            urlEncodedData.append("rating", selectedRating);
+            urlEncodedData.append("text", reviewTextInput);
 
-            // Post review to Google Sheet & email trigger
             try {
                 fetch(GOOGLE_SHEET_URL, {
                     method: "POST",
                     mode: "no-cors",
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: payload.toString()
+                    body: urlEncodedData.toString()
                 });
             } catch (err) {
                 console.error("Failed to send review to Google Drive:", err);
             }
 
-            // Save locally for immediate display
             const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
             savedReviews.unshift(newReview);
             localStorage.setItem("kesriva_reviews", JSON.stringify(savedReviews));
@@ -931,13 +960,13 @@
         }
 
         function renderReviewCard(review, prepend = true) {
-            const reviewsGrid = document.querySelector("#reviews .grid.grid-cols-1.md\\:grid-cols-2");
-            if (!reviewsGrid) return;
+            const carousel = document.getElementById("reviews-carousel");
+            if (!carousel) return;
 
             let starsHtml = "★".repeat(review.rating);
 
             const card = document.createElement("div");
-            card.className = "bg-white border border-brand-gold/40 p-6 rounded-2xl shadow-md space-y-3";
+            card.className = "min-w-[280px] sm:min-w-[340px] md:min-w-[380px] max-w-[380px] bg-white border border-brand-gold/30 p-6 rounded-2xl shadow-sm space-y-3 shrink-0";
             card.innerHTML = `
                 <div class="flex justify-between items-start">
                     <div>
@@ -958,9 +987,9 @@
             `;
 
             if (prepend) {
-                reviewsGrid.prepend(card);
+                carousel.prepend(card);
             } else {
-                reviewsGrid.appendChild(card);
+                carousel.appendChild(card);
             }
         }
 
