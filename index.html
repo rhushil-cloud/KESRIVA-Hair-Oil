@@ -896,13 +896,21 @@
                 date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
             };
 
+            // Prepare URL-encoded form payload to guarantee cross-origin transmission to Apps Script
+            const payload = new URLSearchParams();
+            payload.append("name", nameInput);
+            payload.append("phone", phoneInput);
+            payload.append("email", emailInput);
+            payload.append("rating", selectedRating);
+            payload.append("text", reviewTextInput);
+
             // Post review to Google Sheet & email trigger
             try {
                 fetch(GOOGLE_SHEET_URL, {
                     method: "POST",
                     mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(newReview)
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: payload.toString()
                 });
             } catch (err) {
                 console.error("Failed to send review to Google Drive:", err);
