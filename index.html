@@ -915,48 +915,46 @@
         }
 
         async function submitUserReview(e) {
-            e.preventDefault();
-            
-            const nameInput = document.getElementById("rev-name").value.trim();
-            const phoneInput = document.getElementById("rev-phone").value.trim();
-            const emailInput = document.getElementById("rev-email").value.trim();
-            const reviewTextInput = document.getElementById("rev-text").value.trim();
-            
-            const newReview = {
-                name: nameInput,
-                phone: phoneInput,
-                email: emailInput,
-                rating: selectedRating,
-                text: reviewTextInput,
-                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-            };
+    e.preventDefault();
+    
+    // 1. Capture values safely into local variables first
+    const nameInput = document.getElementById("rev-name").value.trim();
+    const phoneInput = document.getElementById("rev-phone").value.trim();
+    const emailInput = document.getElementById("rev-email").value.trim();
+    const reviewTextInput = document.getElementById("rev-text").value.trim();
+    
+    const newReview = {
+        name: nameInput,
+        phone: phoneInput,
+        email: emailInput,
+        rating: selectedRating,
+        text: reviewTextInput,
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    };
 
-            const params = new URLSearchParams({
-                name: nameInput,
-                phone: phoneInput,
-                email: emailInput,
-                rating: selectedRating,
-                text: reviewTextInput
-            });
+    // 2. Build URL-encoded parameters manually to prevent data loss
+    const queryString = `name=${encodeURIComponent(nameInput)}&phone=${encodeURIComponent(phoneInput)}&email=${encodeURIComponent(emailInput)}&rating=${selectedRating}&text=${encodeURIComponent(reviewTextInput)}`;
 
-            // Trigger request via Image Ping
-            const targetUrl = `${GOOGLE_SHEET_URL}?${params.toString()}`;
-            const imgPing = new Image();
-            imgPing.src = targetUrl;
+    // 3. Send via background Image ping to bypass CORS
+    const targetUrl = `${GOOGLE_SHEET_URL}?${queryString}`;
+    const imgPing = new Image();
+    imgPing.src = targetUrl;
 
-            // Local storage rendering
-            const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
-            savedReviews.unshift(newReview);
-            localStorage.setItem("kesriva_reviews", JSON.stringify(savedReviews));
+    // 4. Save to local storage so it renders instantly on the website carousel
+    const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
+    savedReviews.unshift(newReview);
+    localStorage.setItem("kesriva_reviews", JSON.stringify(savedReviews));
 
-            totalReviewCount++;
-            updateReviewCountUI();
-            renderReviewCard(newReview, true);
+    totalReviewCount++;
+    updateReviewCountUI();
+    renderReviewCard(newReview, true);
 
-            alert("Thank you! Your review has been submitted successfully.");
-            e.target.reset();
-            toggleReviewModal();
-        }
+    alert("Thank you! Your review has been submitted successfully.");
+    
+    // 5. Reset form and close modal only after values are safely captured
+    e.target.reset();
+    toggleReviewModal();
+}
 
         function renderReviewCard(review, prepend = true) {
             const carousel = document.getElementById("reviews-carousel");
