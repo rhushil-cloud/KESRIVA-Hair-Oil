@@ -867,204 +867,155 @@
     </footer>
 
     <!-- JavaScript Logic -->
-    <script>
-        // Update this URL if you ever generate a new Apps Script endpoint
-        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwsqYoFgL5Hdjc-a78KhrztX9J59cu6Jb7Vl-og-p1mS5CWplAIMo56RTe0GoPp5VMVQ/exec";
+<script>
+    const GOOGLE_SHEET_URL = "PASTE_YOUR_ACTIVE_APPS_SCRIPT_URL_HERE";
 
-        let totalReviewCount = 120;
+    let totalReviewCount = 120;
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
-            totalReviewCount += savedReviews.length;
-            updateReviewCountUI();
-            savedReviews.forEach(review => renderReviewCard(review, false));
+    document.addEventListener("DOMContentLoaded", () => {
+        fetchAndRenderReviews();
+    });
+
+    async function fetchAndRenderReviews() {
+        try {
+            const response = await fetch(`${GOOGLE_SHEET_URL}?action=getReviews`);
+            const sheetReviews = await response.json();
+            
+            if (Array.isArray(sheetReviews) && sheetReviews.length > 0) {
+                totalReviewCount = 120 + sheetReviews.length;
+                updateReviewCountUI();
+                
+                const carousel = document.getElementById("reviews-carousel");
+                // Keep static defaults or clear to load live ones
+                // Let's prepend sheet reviews dynamically
+                sheetReviews.reverse().forEach(review => {
+                    renderReviewCard(review, true);
+                });
+            }
+        } catch (err) {
+            console.error("Could not load live reviews from sheet, falling back to local cache.", err);
+            loadFallbackReviews();
+        }
+    }
+
+    function loadFallbackReviews() {
+        const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
+        totalReviewCount += savedReviews.length;
+        updateReviewCountUI();
+        savedReviews.forEach(review => renderReviewCard(review, false));
+    }
+
+    function updateReviewCountUI() {
+        const countElements = document.querySelectorAll("#review-count-text");
+        countElements.forEach(el => {
+            el.innerText = `Based on ${totalReviewCount}+ verified reviews`;
+        });
+    }
+
+    function toggleReviewModal() {
+        document.getElementById('review-modal').classList.toggle('hidden');
+    }
+
+    function scrollCarousel(direction) {
+        const carousel = document.getElementById("reviews-carousel");
+        carousel.scrollBy({
+            left: direction * 340,
+            behavior: 'smooth'
+        });
+    }
+
+    let selectedRating = 5;
+    function setRating(rating) {
+        selectedRating = rating;
+        const stars = document.querySelectorAll('#star-rating-picker .star');
+        stars.forEach((star, idx) => {
+            if (idx < rating) {
+                star.classList.add('text-brand-gold');
+                star.classList.remove('text-gray-300');
+            } else {
+                star.classList.remove('text-brand-gold');
+                star.classList.add('text-gray-300');
+            }
+        });
+    }
+
+    async function submitUserReview(e) {
+        e.preventDefault();
+        
+        const nameInput = document.getElementById("rev-name").value.trim();
+        const phoneInput = document.getElementById("rev-phone").value.trim();
+        const emailInput = document.getElementById("rev-email").value.trim();
+        const reviewTextInput = document.getElementById("rev-text").value.trim();
+        
+        const newReview = {
+            name: nameInput,
+            phone: phoneInput,
+            email: emailInput,
+            rating: selectedRating,
+            text: reviewTextInput,
+            date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        };
+
+        const params = new URLSearchParams({
+            name: nameInput,
+            phone: phoneInput,
+            email: emailInput,
+            rating: selectedRating,
+            text: reviewTextInput
         });
 
-        function updateReviewCountUI() {
-            const countElements = document.querySelectorAll("#review-count-text");
-            countElements.forEach(el => {
-                el.innerText = `Based on ${totalReviewCount}+ verified reviews`;
-            });
-        }
+        // Send submission via Image ping to avoid browser CORS blocks
+        const targetUrl = `${GOOGLE_SHEET_URL}?${params.toString()}`;
+        const imgPing = new Image();
+        imgPing.src = targetUrl;
 
-        function toggleReviewModal() {
-            document.getElementById('review-modal').classList.toggle('hidden');
-        }
+        // Also save locally for instant UI feedback
+        const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
+        savedReviews.unshift(newReview);
+        localStorage.setItem("kesriva_reviews", JSON.stringify(savedReviews));
 
-        function scrollCarousel(direction) {
-            const carousel = document.getElementById("reviews-carousel");
-            carousel.scrollBy({
-                left: direction * 340,
-                behavior: 'smooth'
-            });
-        }
+        totalReviewCount++;
+        updateReviewCountUI();
+        renderReviewCard(newReview, true);
 
-        let selectedRating = 5;
-        function setRating(rating) {
-            selectedRating = rating;
-            const stars = document.querySelectorAll('#star-rating-picker .star');
-            stars.forEach((star, idx) => {
-                if (idx < rating) {
-                    star.classList.add('text-brand-gold');
-                    star.classList.remove('text-gray-300');
-                } else {
-                    star.classList.remove('text-brand-gold');
-                    star.classList.add('text-gray-300');
-                }
-            });
-        }
+        alert("Thank you! Your review has been submitted successfully and sent to our team.");
+        e.target.reset();
+        toggleReviewModal();
+    }
 
-        async function submitUserReview(e) {
-    e.preventDefault();
-    
-    // 1. Capture values safely into local variables first
-    const nameInput = document.getElementById("rev-name").value.trim();
-    const phoneInput = document.getElementById("rev-phone").value.trim();
-    const emailInput = document.getElementById("rev-email").value.trim();
-    const reviewTextInput = document.getElementById("rev-text").value.trim();
-    
-    const newReview = {
-        name: nameInput,
-        phone: phoneInput,
-        email: emailInput,
-        rating: selectedRating,
-        text: reviewTextInput,
-        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-    };
+    function renderReviewCard(review, prepend = true) {
+        const carousel = document.getElementById("reviews-carousel");
+        if (!carousel) return;
 
-    // 2. Build URL-encoded parameters manually to prevent data loss
-    const queryString = `name=${encodeURIComponent(nameInput)}&phone=${encodeURIComponent(phoneInput)}&email=${encodeURIComponent(emailInput)}&rating=${selectedRating}&text=${encodeURIComponent(reviewTextInput)}`;
+        let starsHtml = "★".repeat(Number(review.rating) || 5);
 
-    // 3. Send via background Image ping to bypass CORS
-    const targetUrl = `${GOOGLE_SHEET_URL}?${queryString}`;
-    const imgPing = new Image();
-    imgPing.src = targetUrl;
-
-    // 4. Save to local storage so it renders instantly on the website carousel
-    const savedReviews = JSON.parse(localStorage.getItem("kesriva_reviews") || "[]");
-    savedReviews.unshift(newReview);
-    localStorage.setItem("kesriva_reviews", JSON.stringify(savedReviews));
-
-    totalReviewCount++;
-    updateReviewCountUI();
-    renderReviewCard(newReview, true);
-
-    alert("Thank you! Your review has been submitted successfully.");
-    
-    // 5. Reset form and close modal only after values are safely captured
-    e.target.reset();
-    toggleReviewModal();
-}
-
-        function renderReviewCard(review, prepend = true) {
-            const carousel = document.getElementById("reviews-carousel");
-            if (!carousel) return;
-
-            let starsHtml = "★".repeat(review.rating);
-
-            const card = document.createElement("div");
-            card.className = "min-w-[280px] sm:min-w-[340px] md:min-w-[380px] max-w-[380px] bg-white border border-brand-gold/30 p-6 rounded-2xl shadow-sm space-y-3 shrink-0";
-            card.innerHTML = `
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h4 class="font-bold text-sm text-brand-dark">${review.name}</h4>
-                        <span class="text-[10px] text-emerald-800 bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded-full font-medium inline-block mt-1">
-                            <i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer
-                        </span>
-                    </div>
-                    <span class="text-brand-gold text-xs font-bold">${starsHtml}</span>
+        const card = document.createElement("div");
+        card.className = "min-w-[280px] sm:min-w-[340px] md:min-w-[380px] max-w-[380px] bg-white border border-brand-gold/30 p-6 rounded-2xl shadow-sm space-y-3 shrink-0";
+        card.innerHTML = `
+            <div class="flex justify-between items-start">
+                <div>
+                    <h4 class="font-bold text-sm text-brand-dark">${review.name}</h4>
+                    <span class="text-[10px] text-emerald-800 bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded-full font-medium inline-block mt-1">
+                        <i class="fa-solid fa-circle-check mr-1"></i>Verified Buyer
+                    </span>
                 </div>
-                <p class="text-xs text-gray-700 leading-relaxed italic">
-                    "${review.text}"
-                </p>
-                <div class="flex items-center justify-between text-[10px] text-gray-400 pt-1 border-t border-gray-100">
-                    <span>Reviewed on ${review.date}</span>
-                    <span class="text-emerald-700"><i class="fa-solid fa-thumbs-up mr-1"></i>Helpful</span>
-                </div>
-            `;
+                <span class="text-brand-gold text-xs font-bold">${starsHtml}</span>
+            </div>
+            <p class="text-xs text-gray-700 leading-relaxed italic">
+                "${review.text}"
+            </p>
+            <div class="flex items-center justify-between text-[10px] text-gray-400 pt-1 border-t border-gray-100">
+                <span>Reviewed on ${review.date}</span>
+                <span class="text-emerald-700"><i class="fa-solid fa-thumbs-up mr-1"></i>Helpful</span>
+            </div>
+        `;
 
-            if (prepend) {
-                carousel.prepend(card);
-            } else {
-                carousel.appendChild(card);
-            }
+        if (prepend) {
+            carousel.prepend(card);
+        } else {
+            carousel.appendChild(card);
         }
-
-        // --- Diagnostic Quiz Scripts ---
-        let quizAnswers = {};
-
-        function answerQuiz(qNum, answer) {
-            quizAnswers[`q${qNum}`] = answer;
-            document.getElementById(`quiz-q${qNum}`).classList.add('hidden');
-            document.getElementById(`quiz-q${qNum + 1}`).classList.remove('hidden');
-        }
-
-        function finishQuiz(scalpType) {
-            quizAnswers['scalp'] = scalpType;
-            document.getElementById('quiz-q3').classList.add('hidden');
-            document.getElementById('quiz-result').classList.remove('hidden');
-
-            const durationText = document.getElementById('res-duration');
-            if (scalpType === 'Dry') {
-                durationText.innerText = "Apply overnight and wash off in the morning for intense moisturization.";
-            } else if (scalpType === 'Oily') {
-                durationText.innerText = "Apply 45-60 minutes prior to shampooing.";
-            } else {
-                durationText.innerText = "Apply 1-2 hours before wash or overnight as preferred.";
-            }
-        }
-
-        // --- AI Chatbot Scripts ---
-        function toggleChatbot() {
-            const chatWin = document.getElementById('chat-window');
-            chatWin.classList.toggle('hidden');
-        }
-
-        function sendQuickMessage(text) {
-            document.getElementById('chat-input').value = text;
-            handleChatSubmit(new Event('submit'));
-        }
-
-        function handleChatSubmit(e) {
-            e.preventDefault();
-            const inputEl = document.getElementById('chat-input');
-            const query = inputEl.value.trim();
-            if (!query) return;
-
-            const msgContainer = document.getElementById('chat-messages');
-
-            const userMsg = document.createElement('div');
-            userMsg.className = "bg-brand-forest text-white p-3 rounded-2xl max-w-[85%] ml-auto shadow-sm text-xs";
-            userMsg.innerText = query;
-            msgContainer.appendChild(userMsg);
-
-            inputEl.value = '';
-            msgContainer.scrollTop = msgContainer.scrollHeight;
-
-            setTimeout(() => {
-                const botMsg = document.createElement('div');
-                botMsg.className = "bg-white border border-brand-gold/30 p-3 rounded-2xl max-w-[85%] shadow-sm text-xs text-gray-800 space-y-1";
-                
-                let botReply = getBotAnswer(query.toLowerCase());
-                botMsg.innerHTML = botReply;
-                msgContainer.appendChild(botMsg);
-                msgContainer.scrollTop = msgContainer.scrollHeight;
-            }, 600);
-        }
-
-        function getBotAnswer(q) {
-            if (q.includes('price') || q.includes('cost') || q.includes('size') || q.includes('how much')) {
-                return "<p>KESRIVA Ayurvedic Hair Oil comes in a <strong>50ml bottle</strong> priced at <strong>₹599</strong>.</p><p class='mt-1 text-emerald-700 font-semibold'>Direct WhatsApp order available!</p>";
-            } else if (q.includes('use') || q.includes('apply') || q.includes('how to')) {
-                return "<p><strong>Usage Guide:</strong></p><p>1. Apply 5-8ml directly on scalp partitions.<br>2. Massage gently with fingertips for 5-10 mins.<br>3. Leave for 1 hour or overnight.<br>4. Wash off with mild shampoo. Use 3x weekly!</p>";
-            } else if (q.includes('natural') || q.includes('ingredient') || q.includes('chemical') || q.includes('ayurvedic')) {
-                return "<p>🌿 KESRIVA is <strong>100% Ayurvedic and chemical free</strong>! It contains Bhringraj, Kesar, Amla, Methi, Kalonji, Curry Leaves, and Coconut Oil. 0% Mineral Oils.</p>";
-            } else if (q.includes('contact') || q.includes('phone') || q.includes('email') || q.includes('order')) {
-                return "<p>You can reach Md Tabrez's support team at:<br>📞 Phone: <strong>+91 86689 39991</strong><br>✉️ Email: support@kesriva.com</p>";
-            } else {
-                return "<p>KESRIVA is a 100% natural Ayurvedic hair oil (50ml for ₹599) designed to control dandruff, strengthen roots, and promote glossy hair. Call us at <strong>+91 86689 39991</strong> to place your order!</p>";
-            }
-        }
-    </script>
+    }
+</script>    
 </body>
 </html>
